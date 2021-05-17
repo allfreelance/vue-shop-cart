@@ -1,16 +1,20 @@
 <template>
   <header class="d-flex justify-content-between">
-    <div class="header">
+    <div class="header" @click="goto('home')">
       <h4 class="sweet">Sweet Dish</h4>
       <img class="header-img" src="../../assets/breakfast.png" alt="">
     </div>
-    <div class="d-flex cart">
+    <div class="d-flex right">
+      <div class="d-flex cart" @click="goto('cart')">
       <b-icon-cart class="cart-icon"></b-icon-cart>
       <span class="cart-count">{{cartItemCount}}</span>
-      
+    </div>
+    <div class="d-flex">
       <h5 class="login">Login</h5>
       <h5 class="register">Sign Up</h5>
     </div>
+    </div>
+    
   </header>
 </template>
 <script>
@@ -20,6 +24,11 @@ export default {
     cartItemCount() {
       return this.$store.state.cartItemCount;
     }
+  },
+  methods: {
+    goto(page) {
+      page === 'home' ? this.$router.push('/') : this.$router.push('/cart');
+    }
   }
 }
 </script>
@@ -27,12 +36,14 @@ export default {
   header {
     background-color: lightgrey;
     align-items: center;
+    padding: 0 15px;
   }
   .header {
     height: 60px;
     display: flex;
     justify-content: start;
     align-items: center;
+    cursor: pointer;
   }
   .logo {
     display: flex;
@@ -56,12 +67,16 @@ export default {
     width: 20px;
     position: relative;
     top: -10px;
-    left: -6px;
+    left: 28px;
+  }
+  .right {
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
   }
   .cart {
     height: 100%;
     align-items: center;
-    width: 300px;
     justify-content: space-evenly;
     padding-top: 3px;
     
@@ -76,6 +91,7 @@ export default {
   .register {
     font-weight: 600;
     margin-top: 10px;
+    margin-left: 25px;
   }
   .header-img {
     width: 45px;

@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         name: 'Gioconda',
         price: 100,
         url: require('@/assets/gioconda.jpg'),
-        desc: 'Very tasty gioconda',
+        desc: 'Very tasty Gioconda',
         rate: 4.1
       },
       {
@@ -87,6 +87,40 @@ export const store = new Vuex.Store({
     ],
     
     cartItemCount: 0,
-    cartItem: []
+    cartItems: []
+  },
+  mutations: {
+    addToCart(state, payload) {
+      payload = {...payload, quantity: 1}
+      if (state.cartItems.length > 0) {
+        let itemIndex = state.cartItems.findIndex(i => i.id === payload.id)
+        if (itemIndex >= 0) {
+          state.cartItems[itemIndex]["quantity"] += 1;
+          
+        } else {
+          state.cartItems.push(payload)
+        }
+      } else {
+        state.cartItems.push(payload)
+      }
+      state.cartItemCount++;
+    },
+    removeToCart(state, payload) {
+      if (state.cartItems.length > 0) {
+        let itemIndex = state.cartItems.findIndex(i => i.id === payload.id)
+        if (itemIndex >= 0 && state.cartItemCount > 0) {
+          state.cartItems[itemIndex]["quantity"] -= 1;
+          state.cartItemCount--;
+        }
+      }
+    }
+  },
+  actions: {
+    addToCart: (context, payload) => {
+      context.commit('addToCart', payload)
+    },
+    removeToCart: (context, payload) => {
+      context.commit('removeToCart', payload)
+    }
   }
 })

@@ -1,5 +1,5 @@
 import Home from '../src/components/Home'
-import Card from '../src/components/Card'
+import Cart from '../src/components/Cart'
 import FoodDetails from '../src/components/FoodDetails'
 
 export default [
@@ -8,11 +8,12 @@ export default [
     component: Home
   },
   {
-    path: '/card',
-    component: Card
+    path: '/cart',
+    component: Cart
   },
   {
-    path: '/food-details',
+    path: '/food-details/:name',
+    name: 'food-details',
     component: FoodDetails
   }
 ]
