@@ -90,4 +90,11 @@ export default {
   .btn {
     margin-right: 10px;
   }
+  
+  @media (max-width: 576px) {
+    .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 </style>

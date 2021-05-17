@@ -2,10 +2,10 @@
   <div class="wrapper">
     <Header></Header>
     <div class="content mt-4">
-      <div class="container mb-5">
+      <div class="container mb-5 text-center">
         <h4 class="my4 fw-600 d-blue">Top rated</h4>
         <div class="row justify-content-between mb-4">
-          <div class="col-md-4 pointer" 
+          <div class="col-md-6 col-lg-4 pointer" 
               v-for="item in topRated" 
               :key="item.id"
               @click="foodDetails(item)"

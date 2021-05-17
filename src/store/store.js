@@ -112,6 +112,9 @@ export const store = new Vuex.Store({
           state.cartItems[itemIndex]["quantity"] -= 1;
           state.cartItemCount--;
         }
+        if (state.cartItems[itemIndex]["quantity"] === 0) {
+          state.cartItems.splice(itemIndex, 1)
+        }
       }
     }
   },

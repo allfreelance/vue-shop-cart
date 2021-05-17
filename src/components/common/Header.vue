@@ -57,6 +57,9 @@ export default {
     margin-top: 7px;
   }
   .cart-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 15px;
     color: rgba(245, 132, 40, 0.467);
     padding: 0 5px;
@@ -97,5 +100,11 @@ export default {
     width: 45px;
     height: 45px;
     margin-left: 10px;
+  }
+  
+  @media (max-width: 576px) {
+    header {
+      flex-direction: column;
+    }
   }
 </style>

@@ -4,35 +4,32 @@
     <div class="cart-body">
       <div v-if="totalPrice > 0" class="container mb-5">
         <h4 class="my-r my-cart">My Cart</h4>
-        <div class="d-flex my-3 justify-content-between">
-          <h4 class="fw-600">Summary</h4>
-          <h4 class="fw-600">Cart</h4>
-        </div>
-        <div class="d-flex">
+        <div class="d-flex cart-body-wrapper">
           <Summary :totalPrice="totalPrice"></Summary>
           
-          <div class="row cart-info-wrapper">
+          <div class="row cart-info-wrapper justify-content-end">
             <div class="cart-info col-md-12">
+              <h4 class="fw-600">Cart</h4>
               <ul>
                 <li v-for="item in cartItems" :key="item.id" class="cart-info-li">
                   <div class="cart-items">
                     <img class="cart-info-li-img" :src="item.url" alt="">
-                    <h6 class="mt-15">{{item.name}}</h6>
+                    <h6 class="mt-15 cart-item-name">{{item.name}}</h6>
                     <div class="d-flex mt-10">
                       <button @click="removeItems(item)" class="remove" type="button">-</button>
                       <span class="cart-quantity">{{item.quantity}}</span>
                       <button @click="addItems(item)" class="add" type="button">+</button>
                     </div>
-                    <h6 class="mt-15">{{item.price}}</h6>
+                    <h6 class="mt-15 text-end">{{item.price * item.quantity}} $</h6>
                   </div>
                   <div class="line"></div>
                 </li>
               </ul>
+              <div class="checkout-btn d-flex justify-content-end">
+                <button @click="checkout" class="btn btn-primary" type="button">Checkout</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="checkout-btn d-flex justify-content-end">
-          <button @click="checkout" class="btn btn-primary" type="button">Checkout</button>
         </div>
       </div>
       <EmptyCart v-else></EmptyCart>
@@ -73,9 +70,11 @@ export default {
       this.$store.dispatch('addToCart', item)
     },
     checkout() {
-      swal("Good Job!", "Your order is placed successfuly", "Success").then(
+      swal("Good Job!", "Success").then(
         value => {
-          window.location.href = "/cart";
+          if (value) {
+            window.location.href = "/";
+          }
       })
     }
   }
@@ -157,7 +156,7 @@ export default {
     color: darkblue;
   }
   .cart-info-wrapper {
-    width: 5px;
+    width: 100%;
   }
   .cart-info {
     max-width: 70%;
@@ -172,7 +171,26 @@ export default {
     object-fit: cover;
   }
   .checkout-btn {
-    width: 80%;
     margin-top: 2%;
+  }
+  .cart-item-name {
+    width: 170px;
+    margin-left: 15px;
+  }
+  ul,
+  li {
+    padding: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .cart-body-wrapper {
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+    }
+    .cart-info {
+      max-width: 100%;
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
   }
 </style>

@@ -45,4 +45,14 @@ export default {
   .fw-600 {
     font-weight: 600;
   }
+  
+  @media (max-width: 576px) {
+    footer h5,
+    footer h4 {
+      font-size: 10px;
+    }
+    .about-us {
+      width: 230px;
+    }
+  }
 </style>
