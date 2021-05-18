@@ -16,7 +16,7 @@
         </div>
         <h4 class="my4 fw-600 d-blue">All Categories</h4>
         <div class="row justify-content-between mb-4">
-          <div class="col-md-4 pointer" 
+          <div class="col-md-6 col-lg-4 pointer" 
               v-for="item in allCategories" 
               :key="item.id"
               @click="foodDetails(item)"
@@ -27,7 +27,7 @@
         </div>
         <h4 class="my4 fw-600 d-blue">Dishes Near You</h4>
         <div class="row justify-content-between mb-4">
-          <div class="col-md-4 pointer" 
+          <div class="col-md-6 col-lg-4 pointer" 
               v-for="item in dishesNearYou" 
               :key="item.id"
               @click="foodDetails(item)"

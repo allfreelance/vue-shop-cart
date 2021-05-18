@@ -15,12 +15,14 @@
                   <div class="cart-items">
                     <img class="cart-info-li-img" :src="item.url" alt="">
                     <h6 class="mt-15 cart-item-name">{{item.name}}</h6>
-                    <div class="d-flex mt-10">
+                    <div class="cart-item-qnt-block">
+                      <div class="d-flex mt-10">
                       <button @click="removeItems(item)" class="remove" type="button">-</button>
                       <span class="cart-quantity">{{item.quantity}}</span>
                       <button @click="addItems(item)" class="add" type="button">+</button>
                     </div>
-                    <h6 class="mt-15 text-end">{{item.price * item.quantity}} $</h6>
+                    <h6 class="mt-15 text-end cart-item-price">{{item.price * item.quantity}} $</h6>
+                    </div>
                   </div>
                   <div class="line"></div>
                 </li>
@@ -174,12 +176,20 @@ export default {
     margin-top: 2%;
   }
   .cart-item-name {
-    width: 170px;
+    width: 70%;
     margin-left: 15px;
   }
   ul,
   li {
     padding: 0;
+  }
+  .cart-item-price {
+    min-width: 50px;
+  }
+  .cart-item-qnt-block {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
   }
   
   @media (max-width: 768px) {
@@ -191,6 +201,11 @@ export default {
       max-width: 100%;
       margin-bottom: 40px;
       margin-top: 40px;
+    }
+  }
+  @media (max-width: 576px) {
+    .cart-items {
+      flex-wrap: wrap;
     }
   }
 </style>

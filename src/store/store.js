@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// import gioconda from '../assets/gioconda.jpg'
-
 Vue.use(Vuex)
+
+let cartItems = window.localStorage.getItem('cartItems');
+let cartItemCount = window.localStorage.getItem('cartItemCount');
 
 export const store = new Vuex.Store({
   state: {
@@ -11,7 +12,7 @@ export const store = new Vuex.Store({
       {
         id: 1,
         name: 'Gioconda',
-        price: 100,
+        price: 10,
         url: require('@/assets/gioconda.jpg'),
         desc: 'Very tasty Gioconda',
         rate: 4.1
@@ -19,7 +20,7 @@ export const store = new Vuex.Store({
       {
         id: 2,
         name: 'Cake',
-        price: 300,
+        price: 30,
         url: require('@/assets/cake.jpg'),
         desc: 'Very tasty gioconda',
         rate: 3.1
@@ -27,7 +28,7 @@ export const store = new Vuex.Store({
       {
         id: 3,
         name: 'Croissant',
-        price: 200,
+        price: 20,
         url: require('@/assets/croissant.jpg'),
         desc: 'Very tasty gioconda',
         rate: 5.0
@@ -37,7 +38,7 @@ export const store = new Vuex.Store({
       {
         id: 4,
         name: 'Dumplings',
-        price: 100,
+        price: 15,
         url: require('@/assets/dumplings.jpg'),
         desc: 'Very tasty dumplings',
         rate: 4.8
@@ -45,15 +46,15 @@ export const store = new Vuex.Store({
       {
         id: 5,
         name: 'Barbecue',
-        price: 300,
+        price: 30,
         url: require('@/assets/barbecue.jpg'),
         desc: 'Very tasty',
         rate: 3.1
       },
       {
         id: 6,
-        name: 'Salas',
-        price: 90,
+        name: 'Salad',
+        price: 10,
         url: require('@/assets/salad.jpg'),
         desc: 'Very tasty',
         rate: 3.9
@@ -63,7 +64,7 @@ export const store = new Vuex.Store({
       {
         id: 7,
         name: 'Okroshka',
-        price: 190,
+        price: 90,
         url: require('@/assets/okroshka.jpg'),
         desc: 'Very tasty Okroshka',
         rate: 4.7
@@ -71,7 +72,7 @@ export const store = new Vuex.Store({
       {
         id: 8,
         name: 'Dessert',
-        price: 310,
+        price: 10,
         url: require('@/assets/dessert.jpg'),
         desc: 'Very tasty',
         rate: 4.5
@@ -79,15 +80,15 @@ export const store = new Vuex.Store({
       {
         id: 9,
         name: 'Pasta',
-        price: 500,
+        price: 50,
         url: require('@/assets/pasta.jpg'),
         desc: 'Very tasty',
         rate: 4.0
       }
     ],
     
-    cartItemCount: 0,
-    cartItems: []
+    cartItemCount: cartItemCount ? parseInt(cartItemCount) : 0,
+    cartItems: cartItems ? JSON.parse(cartItems) : [],
   },
   mutations: {
     addToCart(state, payload) {
@@ -104,6 +105,7 @@ export const store = new Vuex.Store({
         state.cartItems.push(payload)
       }
       state.cartItemCount++;
+      this.commit('saveCart');
     },
     removeToCart(state, payload) {
       if (state.cartItems.length > 0) {
@@ -116,6 +118,11 @@ export const store = new Vuex.Store({
           state.cartItems.splice(itemIndex, 1)
         }
       }
+      this.commit('saveCart');
+    },
+    saveCart(state) {
+      window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+      window.localStorage.setItem('cartItemCount', state.cartItemCount);
     }
   },
   actions: {

@@ -4,7 +4,7 @@
     <div class="food-details">
       <div class="container mb-5">
         <h4 class="my-4 fw600">Add item to cart</h4>
-        <div class="row">
+        <div class="row food-details-wrapper">
           <div class="col-md-4 food-img-wrapper">
             <img class="food-img" :src="details.url" alt="">
           </div>
@@ -91,10 +91,14 @@ export default {
     margin-right: 10px;
   }
   
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     .btn {
       width: 100%;
       margin-bottom: 10px;
+    }
+    .food-details-wrapper {
+      flex-direction: column;
+      align-items: center;
     }
   }
 </style>
