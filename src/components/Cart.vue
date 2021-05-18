@@ -75,7 +75,10 @@ export default {
       swal("Good Job!", "Success").then(
         value => {
           if (value) {
-            window.location.reload();
+            let homeUrl = window.location.href.indexOf('#');
+            let newUrl = window.location.href.slice(0, homeUrl);
+            this.$store.commit('checkout');
+            window.location.href = newUrl;
           }
       })
     }

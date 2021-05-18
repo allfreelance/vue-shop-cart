@@ -105,7 +105,6 @@ export const store = new Vuex.Store({
         state.cartItems.push(payload)
       }
       state.cartItemCount++;
-      this.commit('saveCart');
     },
     removeToCart(state, payload) {
       if (state.cartItems.length > 0) {
@@ -118,19 +117,25 @@ export const store = new Vuex.Store({
           state.cartItems.splice(itemIndex, 1)
         }
       }
-      this.commit('saveCart');
     },
     saveCart(state) {
       window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
       window.localStorage.setItem('cartItemCount', state.cartItemCount);
+    },
+    checkout(state) {
+      state.cartItems = [];
+      state.cartItemCount = 0;
+      this.commit('saveCart');
     }
   },
   actions: {
     addToCart: (context, payload) => {
       context.commit('addToCart', payload)
+      context.commit('saveCart', payload);
     },
     removeToCart: (context, payload) => {
       context.commit('removeToCart', payload)
+      context.commit('saveCart', payload);
     }
   }
 })
