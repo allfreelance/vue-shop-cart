@@ -75,7 +75,7 @@ export default {
       swal("Good Job!", "Success").then(
         value => {
           if (value) {
-            window.location.href = "/";
+            window.location.reload();
           }
       })
     }
