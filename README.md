@@ -1,5 +1,5 @@
 # vue-shop-cart
-
+##### https://allfreelance.github.io/vue-shop-cart/
 
 > Implementation of an online store cart.
 > Used HTML, CSS/SASS, JS, Vuejs, Vuex, VueRouter, localStorage, Gulp, Git.
